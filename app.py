@@ -13,4 +13,7 @@ cors = CORS(app, resources={r"/": {"origins": "http://localhost:4200"}})
 @app.route("/") 
 @cross_origin(origin='http://localhost:4200',headers=['Content- Type','Authorization'])
 def home(): 
-    return "API SPED - V.1.0.0 - teste 2"
+    return "API - V.1.0.0 "
+    
+if __name__ == '__main__':
+    app.run()
