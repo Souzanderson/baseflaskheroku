@@ -3,17 +3,27 @@ from flask import request
 from flask import jsonify
 from flask_cors import CORS, cross_origin
 
-import datetime
-
 app = Flask(__name__) 
-cors = CORS(app, resources={r"/": {"origins": "http://localhost:4200"}})
+cors = CORS(app, resources={r"/": {"origins": "*.*"}})
 
 # ROTAS
 
-@app.route("/") 
-@cross_origin(origin='http://localhost:4200',headers=['Content- Type','Authorization'])
+@app.route("/", methods=['GET']) 
+@cross_origin()
 def home(): 
-    return "API - V.1.0.0 "
+    return jsonify({
+        "api": "API FLASK",
+        "version": "1.0.0"
+    })
+    
+@app.route("/upload", methods=['POST']) 
+@cross_origin()
+def upload(): 
+    js = request.get_json()
+    print(js)
+    return jsonify(js)
+    
+
     
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5001)
